@@ -3,6 +3,8 @@
     height: 50px;
     border-radius: 30px;
 }
+
 .Post{
-    
+    margin: 5px;
+    border: 2px solid red;
 }

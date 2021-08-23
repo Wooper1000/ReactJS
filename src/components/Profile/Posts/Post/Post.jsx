@@ -5,8 +5,9 @@ const Post = (props)=>{
            <div className={s.PostAvatar}>
                <img src='https://e7.pngegg.com/pngimages/340/946/png-clipart-avatar-user-computer-icons-software-developer-avatar-child-face.png' alt='хуй'/>
                </div>
-               <text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, expedita.</text>
-               <div>Like <strong>{props.LikeCount}</strong></div>
+            <h3>{props.author} написал</h3>
+               <text>{props.text}</text>
+               <div>Like <strong>{props.likesCount}</strong></div>
         </div>
     )
 }
