@@ -1,5 +1,6 @@
 .header img{
   width: 100px;
+  margin : 10px 10px;
 }
 .header{
   grid-area: h;

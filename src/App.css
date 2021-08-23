@@ -11,7 +11,9 @@
     grid-gap: 10px;
 }
 
-.content{
-  grid-area: c;
-  background-color: darkgreen;
+.content {
+    height: 720px;
+    grid-area: c;
+    background-image: url("https://images.unsplash.com/photo-1547628641-ec2098bb5812?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80");
+    background-size: auto;
 }

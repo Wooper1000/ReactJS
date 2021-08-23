@@ -1,8 +1,11 @@
 .nav{
   grid-area: n;
   background-color: cornflowerblue;
+  padding: 20px;
+  height: fit-content;
 }
 .item a{
+  font-size: 25px;
   color:white;
   text-decoration: none;
 }
