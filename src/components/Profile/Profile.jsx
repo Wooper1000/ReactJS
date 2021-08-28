@@ -1,14 +1,18 @@
 import Posts from './Posts/Posts'
 import s from './Profile.module.css'
-const Profile  = ()=>{
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+
+const Profile = (props) => {
+    debugger;
     return (
-    <div className={s.Profile}>
-    <div className={s.ProfileLogo}>
-      <img src='https://a.cdn-hotels.com/gdcs/production180/d1647/96f1181c-6751-4d1b-926d-e39039f30d66.jpg' alt='хуй2' />
-      </div>
-    <div>ava + info</div>
-    <Posts />
-  </div>
-  )
+        <div className={s.profile}>
+            <ProfileInfo/>
+            <Posts profilePage={props.profilePage}
+                   addPost={props.addPost}
+                   symboleChange={props.symboleChange}
+            />
+
+        </div>
+    )
 }
 export default Profile;

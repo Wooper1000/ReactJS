@@ -7,17 +7,20 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import store from "./redux/State";
 
-
-const App = () => {
+const App = (props) => {
+    debugger;
     return (
         <BrowserRouter>
             <div className='wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='content'>
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' render={()=><Profile profilePage={props.state.profilePage}
+                                                                addPost={props.addPost}
+                                                                symboleChange={props.symboleChange}/>}/>
+                    <Route path='/dialogs' render={()=><Dialogs state={props.state.dialogPage}/>}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/news' component={News}/>
                     <Route path='/settings' component={Settings}/>
