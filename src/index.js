@@ -8,18 +8,17 @@ import Profile from "./components/Profile/Profile";
 
 
 let rerenderEntireTree = (state)=>{
-    debugger;
+
     ReactDOM.render(
         <React.StrictMode>
-            <App state={store.state}
-                 addPost={store.addPost.bind(store)}
-                 symboleChange={store.symboleChange.bind(store)}/>
+            <App state={store.getState()}
+                 dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 rerenderEntireTree(store.getState())
-store.subscriber(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 
 

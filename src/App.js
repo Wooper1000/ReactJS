@@ -10,7 +10,7 @@ import Settings from "./components/Settings/Settings";
 import store from "./redux/State";
 
 const App = (props) => {
-    debugger;
+
     return (
         <BrowserRouter>
             <div className='wrapper'>
@@ -18,8 +18,7 @@ const App = (props) => {
                 <Navbar/>
                 <div className='content'>
                     <Route path='/profile' render={()=><Profile profilePage={props.state.profilePage}
-                                                                addPost={props.addPost}
-                                                                symboleChange={props.symboleChange}/>}/>
+                                                                dispatch={props.dispatch}/>}/>
                     <Route path='/dialogs' render={()=><Dialogs state={props.state.dialogPage}/>}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/news' component={News}/>

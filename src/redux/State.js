@@ -1,15 +1,13 @@
 let store = {
-    state: {
-        profilePage :{
-            newPostText:'IT',
+    _state: {
+        profilePage: {
+            newPostText: 'IT',
             posts: [
                 {id: 1, author: 'Макс', text: `Хуй`, likesCount: '12'},
                 {id: 2, author: 'Рома', text: 'ты лох', likesCount: '100500'},
-                {id: 3, author: 'Пашка', text: 'он пиздит ты красава', likesCount: '0'},
-                {id: 4, author: 'Мама', text: 'Мальчики что тут происходит', likesCount: '100'},
             ]
         },
-        dialogPage:{
+        dialogPage: {
             dialogs: [
                 {id: '1', name: 'Даня'},
                 {id: '2', name: 'Маша'},
@@ -26,26 +24,29 @@ let store = {
             ]
         }
     },
-    getState(){
-      return this.state;
-    },
-    rerenderEntireTree(){
+    _callSubscriber() {
         console.log('There are no subscribers were added yet')
     },
-    addPost(textPost){
-debugger;
-        let newPost = {id: 5, author: 'Мишаня', text: this.state.profilePage.newPostText, likesCount: '0'};
-        this.state.profilePage.posts.push(newPost);
-        this.rerenderEntireTree(this.state);
 
+    getState() {
+        return this._state;
     },
-    symboleChange(text){
-        this.state.profilePage.newPostText=text;
-        this.rerenderEntireTree(this.state)
+    subscribe(observer){
+        this.callSubscriber = observer;
     },
-    subscriber(observer){
-        this.rerenderEntireTree = observer;
-    }
+
+    dispatch(action) {
+            if (action.type === "ADD-POST") {
+                let newPost = {id: 5, author: 'Мишаня', text: this._state.profilePage.newPostText, likesCount: '0'};
+                this._state.profilePage.posts.push(newPost);
+                this.callSubscriber(this._state);
+            }
+            else if(action.type === "UPDATE-NEW-POST-TEXT"){
+                this._state.profilePage.newPostText = action.newText;
+                this.callSubscriber(this._state)
+        }
+    },
+
 }
 
 export default store;
