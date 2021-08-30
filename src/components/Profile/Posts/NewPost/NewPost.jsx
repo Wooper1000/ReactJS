@@ -1,6 +1,6 @@
 import s from './NewPost.module.css'
 import React from  'react'
-import {addPostActionCreator, updateNewPostActionCreator} from "../../../../redux/State";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../../../redux/profileReduser";
 
 
 
