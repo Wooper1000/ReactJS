@@ -14,6 +14,7 @@
 .content {
     height: 720px;
     grid-area: c;
-    background-image: url("https://images.unsplash.com/photo-1547628641-ec2098bb5812?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80");
-    background-size: auto;
+    background-image: url("https://sun9-17.userapi.com/impg/oE-eACt8wzXtO2for-nMg5RJo0sdNOh25A2OpA/gYtpNmcTNDM.jpg?size=2560x1696&quality=96&sign=2c27eb580879bd0ad6c97b1eebf755ac&type=album");
+    background-size: contain;
+    background-repeat: no-repeat;
 }

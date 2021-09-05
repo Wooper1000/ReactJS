@@ -1,7 +1,7 @@
 import s from './News.module.css'
 const News = (props)=>{
     return (
-        <div>
+        <div className={s.news}>
             НОВОСТНАЯ ЛЕНТА ЗДЕСЯ!
         </div>
     )

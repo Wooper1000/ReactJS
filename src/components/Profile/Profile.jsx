@@ -1,14 +1,14 @@
-import Posts from './Posts/Posts'
+
 import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import store from "../../redux/reduxStore";
+import PostsContainer from "./Posts/PostsContainer";
 
 const Profile = (props) => {
-    debugger;
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <Posts profilePage={props.profilePage}
-                   dispatch={props.dispatch}/>
+            <PostsContainer store={store}/>
 
         </div>
     )
