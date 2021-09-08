@@ -1,0 +1,13 @@
+.user{
+   border: red solid 2px;
+    width:400px;
+    margin: 10px auto;
+    padding:10px;
+}
+.avaAndFollow{
+    display: inline-block;
+    margin: 0 auto;
+}
+.userInfo{
+    display: inline-block;
+}
