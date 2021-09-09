@@ -1,33 +1,41 @@
-const SWITCH_FOLLOW_STATUS = "SWITCH_FOLLOW_STATUS"
-let initialState = {
-    users: [
-        {id: 1, followStatus:false,fullName: 'Shabanskii D.', status: 'searching for a job', location: {city: 'SPB', country: 'RUSSIA'}},
-        {id: 2, followStatus:true,fullName: 'Yakovlev R.', status: 'getting fat', location: {city: 'SPB', country: 'RUSSIA'}}
-    ]
-}
-const usersReducer = (state=initialState, action) => {
+const SWITCH_FOLLOW_STATUS = "SWITCH_FOLLOW_STATUS";
+const SET_USERS = "SET_USERS";
+let initialState = {users:[]}
+const usersReducer = (state = initialState, action) => {
 
-switch (action.type) {
-    case 'SWITCH_FOLLOW_STATUS':
-        debugger;
-        return {
+    switch (action.type) {
+        case 'SWITCH_FOLLOW_STATUS':
+            debugger;
+            return {
 
-            ...state,
-            users: state.users.map(
-                u=>{
-                    if(u.id===action.id) return {...u,followStatus:!u.followStatus}
-                    return u
-                }
-            )
-        }
-    default : return state
+                ...state,
+                users: state.users.map(
+                    u => {
+                        if (u.id === action.id) return {...u, followStatus: !u.followStatus}
+                        return u
+                    }
+                )
+            }
+        case "SET_USERS":
+            return {
+                ...state,
+                users: [...action.users]
+            }
+        default :
+            return state
 
+    }
 }
-}
-export const switchFollowAC = (id)=>{
+export const switchFollowAC = (id) => {
     return {
-        type : SWITCH_FOLLOW_STATUS,
+        type: SWITCH_FOLLOW_STATUS,
         id
     }
 }
-export default  usersReducer;
+export const setUsersAC = (users) => {
+    return {
+        type: SET_USERS,
+        users
+    }
+}
+export default usersReducer;

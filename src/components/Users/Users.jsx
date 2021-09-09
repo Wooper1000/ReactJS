@@ -1,32 +1,45 @@
-import s from './Users.module.css'
-import User from './User/User'
-import React from "react";
-
-const Users = (props) => {
-
-
-    let url = 'https://sun9-70.userapi.com/s/v1/ig2/-5AcrDp3AtfHHJ9i-FZZSSzWQsVxh3Pr2PkG22QbdSYhwWPcBP71o1p_sW4dt3jt29FbqLGzHXrMGFwRv3bCr4Mc.jpg?size=50x50&quality=96&crop=0,235,966,966&ava=1';
-    let switchFollow = (id) => {
-        props.switchFollowStatus(id)
-    }
-    let usersList = props.usersList.users.map(u => {
-            return (
-                <User avaURL={url}
-                      switchFollowStatus={switchFollow}
-                      fullName={u.fullName}
-                      followStatus={u.followStatus ? "Отписаться" : "Подписаться"}
-                      status={u.status}
-                      location={u.location}
-                      id={u.id}
-                />
-            )
+import s from "./Users.module.css";
+import * as React from "react";
+import * as axios from 'axios';
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        debugger;
+        if(props.usersList.length === 0){
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response=>{
+                props.setUsers(response.data.items)
+                console.log(response)
+            })
         }
-    )
+    }
 
-    return (
-        <div className={s.users}>
-            {usersList}
-        </div>
-    )
+    render() {
+
+        return (
+            this.props.usersList.map(u => (
+                    <div key={u.id} className={s.user}>
+                        <div className={s.avaAndFollow}>
+                            <img src={u.photos.large} alt='НЕТУ'/>
+                            <button onClick={() => {
+                                this.props.switchFollowStatus(this.props.id)
+                            }}>{u.followed ? "Отписаться":"Подписаться"}</button>
+                        </div>
+                        <div className={s.userInfo}>
+                            <h3>{u.name}</h3>
+                            <div>{u.status}</div>
+                            {/*<div>*/}
+                            {/*    <h3>{this.props.location.country}</h3>*/}
+                            {/*    <h2>{this.props.location.city}</h2>*/}
+                            {/*</div>*/}
+                        </div>
+                    </div>
+                )
+            )
+
+        )
+
+    }
+
 }
+
 export default Users;

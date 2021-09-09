@@ -10,7 +10,7 @@ import {combineReducers, createStore} from "redux";
 let reducers = combineReducers({
     dialogsPage:dialogsReducer,
     profilePage:profileReducer,
-    users:usersReducer
+    usersPage:usersReducer
 })
 
 let store = createStore(reducers);
