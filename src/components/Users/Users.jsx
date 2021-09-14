@@ -1,44 +1,39 @@
 import s from "./Users.module.css";
 import * as React from "react";
-import * as axios from 'axios';
-class Users extends React.Component {
-    constructor(props) {
-        super(props);
-        debugger;
-        if(props.usersList.length === 0){
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response=>{
-                props.setUsers(response.data.items)
-                console.log(response)
-            })
-        }
+import Preloader from "../common/preloader/Preloader";
+let Users = (props) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pagesCount);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(<span className={props.currentPage === i ? s.activePage : null} onClick={() => {
+            props.onPageChange(i)
+        }}> {i} </span>)
     }
-
-    render() {
-
-        return (
-            this.props.usersList.map(u => (
+    return <>
+       <div>{props.isFetching ? <Preloader /> : null}</div>
+        <div>
+            <span>{pages}</span>
+        </div>
+        {
+            props.usersList.map(u => (
                     <div key={u.id} className={s.user}>
                         <div className={s.avaAndFollow}>
-                            <img src={u.photos.large} alt='НЕТУ'/>
+                            <img src={u.photos.small} alt='НЕТУ'/>
                             <button onClick={() => {
-                                this.props.switchFollowStatus(this.props.id)
-                            }}>{u.followed ? "Отписаться":"Подписаться"}</button>
+                                props.switchFollowStatus(u.id)
+                            }}>{u.followed ? "Отписаться" : "Подписаться"}</button>
                         </div>
                         <div className={s.userInfo}>
                             <h3>{u.name}</h3>
                             <div>{u.status}</div>
-                            {/*<div>*/}
-                            {/*    <h3>{this.props.location.country}</h3>*/}
-                            {/*    <h2>{this.props.location.city}</h2>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 )
             )
 
-        )
+        }
+    </>
 
-    }
 
 }
 

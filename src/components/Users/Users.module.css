@@ -11,3 +11,6 @@
 .userInfo{
     display: inline-block;
 }
+.activePage{
+    font-weight: bold;
+}
