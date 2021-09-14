@@ -1,16 +1,15 @@
-
-import s from './Profile.module.css'
+import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import store from "../../redux/reduxStore";
 import PostsContainer from "./Posts/PostsContainer";
+import store from "../../redux/reduxStore";
+let Profile = (props)=> {
+    debugger;
+    return(
+    <div className={s.profile}>
+<div> {!props.profile.fullName?props.profile.fullName:<ProfileInfo/>}</div>
+        {/*<ProfileInfo/>*/}
+        {/*<PostsContainer store={store}/>*/}
 
-const Profile = (props) => {
-    return (
-        <div className={s.profile}>
-            <ProfileInfo/>
-            <PostsContainer store={store}/>
-
-        </div>
-    )
-}
+    </div>
+)}
 export default Profile;

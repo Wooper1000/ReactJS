@@ -1,6 +1,8 @@
 import s from "./Users.module.css";
 import * as React from "react";
 import Preloader from "../common/preloader/Preloader";
+import no_avatar from '../../assets/no-avatar.jpg'
+import {NavLink} from "react-router-dom";
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pagesCount);
     let pages = [];
@@ -9,16 +11,21 @@ let Users = (props) => {
             props.onPageChange(i)
         }}> {i} </span>)
     }
-    return <>
+
+    return  <>
        <div>{props.isFetching ? <Preloader /> : null}</div>
         <div>
             <span>{pages}</span>
         </div>
         {
-            props.usersList.map(u => (
+            props.usersList.map(u => {
+                debugger;
+                return(
                     <div key={u.id} className={s.user}>
                         <div className={s.avaAndFollow}>
-                            <img src={u.photos.small} alt='НЕТУ'/>
+                            <NavLink to={'/profile/'+u.id}>
+                            <img src={u.photos.small ? u.photos.small : no_avatar} alt='НЕТУ'/>
+                            </NavLink>
                             <button onClick={() => {
                                 props.switchFollowStatus(u.id)
                             }}>{u.followed ? "Отписаться" : "Подписаться"}</button>
@@ -28,7 +35,7 @@ let Users = (props) => {
                             <div>{u.status}</div>
                         </div>
                     </div>
-                )
+                )}
             )
 
         }

@@ -3,7 +3,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    switchFollow,
+    switchFollowStatus,
     toggleFetchingStatus
 } from "../../redux/usersReducer";
 import Users from "./Users";
@@ -16,7 +16,8 @@ class UsersAPIComponent extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesCount}`).then(response => {
             this.props.toggleFetchingStatus(false);
             this.props.setTotalUsersCount(response.data.totalCount)
-            this.props.setUsers(response.data.items)
+            let users = response.data.items.filter(i=>true)
+            this.props.setUsers(users)
         })
 
 
@@ -28,7 +29,8 @@ class UsersAPIComponent extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pagesCount}`).then(response => {
             this.props.toggleFetchingStatus(false)
             this.props.setTotalUsersCount(response.data.totalCount)
-            this.props.setUsers(response.data.items)
+            let users = response.data.items.filter(i=>true)
+            this.props.setUsers(users)
         })
 
     }
@@ -77,7 +79,7 @@ let mapStateToProps = (state) => {
 //     }
 // }
 const UsersContainer = connect(mapStateToProps, {
-    switchFollow,
+    switchFollowStatus,
     setUsers,
     setTotalUsersCount,
     setCurrentPage,

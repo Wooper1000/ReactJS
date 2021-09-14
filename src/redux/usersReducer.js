@@ -5,7 +5,7 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_FETCHING_STATUS = "TOGGLE_FETCHING_STATUS"
 let initialState = {
     users: [],
-    currentPage: 2,
+    currentPage: 1,
     pagesCount : 50,
     totalUsersCount : 0,
     isFetching : false
@@ -50,7 +50,7 @@ const usersReducer = (state = initialState, action) => {
 
     }
 }
-export const switchFollow = (id) => {
+export const switchFollowStatus = (id) => {
     return {
         type: SWITCH_FOLLOW_STATUS,
         id
