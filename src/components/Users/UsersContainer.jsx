@@ -8,28 +8,49 @@ import {
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import * as React from "react";
-import * as axios from "axios";
+import {usersApi} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
+
     componentDidMount() {
         this.props.toggleFetchingStatus(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesCount}`).then(response => {
+        usersApi.getUsers(this.props.currentPage, this.props.pagesCount).then(data => {
             this.props.toggleFetchingStatus(false);
-            this.props.setTotalUsersCount(response.data.totalCount)
-            let users = response.data.items.filter(i=>true)
+            this.props.setTotalUsersCount(data.totalCount)
+            let users = data.items.filter(i => true)
             this.props.setUsers(users)
         })
 
 
     }
 
+    switchFollowStatus = (userId) => {
+        usersApi.getFollowStatus(userId).then(
+            data => {
+                debugger;
+                if (!data) {
+                    usersApi.followUser(userId).then(data => {
+                        if (data.resultCode === 0) this.props.switchFollowStatus(userId)
+                        else alert('Ошибочка вышла')
+                    })
+                } else {
+                    usersApi.unfollowUser(userId).then(data => {
+                        if (data.resultCode === 0) {
+                            this.props.switchFollowStatus(userId)
+                        } else alert('Ошибочка вышла')
+                    })
+
+                }
+            }
+        )
+    }
     onPageChange = (pageNumber) => {
         this.props.toggleFetchingStatus(true);
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pagesCount}`).then(response => {
+        usersApi.getUsers(pageNumber,this.props.pagesCount).then(data => {
             this.props.toggleFetchingStatus(false)
-            this.props.setTotalUsersCount(response.data.totalCount)
-            let users = response.data.items.filter(i=>true)
+            this.props.setTotalUsersCount(data.totalCount)
+            let users = data.items.filter(i => true)
             this.props.setUsers(users)
         })
 
@@ -42,7 +63,7 @@ class UsersAPIComponent extends React.Component {
                    currentPage={this.props.currentPage}
                    onPageChange={this.onPageChange}
                    usersList={this.props.usersList}
-                   switchFollowStatus={this.props.switchFollowStatus}
+                   switchFollowStatus={this.switchFollowStatus}
                    isFetching={this.props.isFetching}
             />
         );

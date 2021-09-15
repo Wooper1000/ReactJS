@@ -19,7 +19,6 @@ let Users = (props) => {
         </div>
         {
             props.usersList.map(u => {
-                debugger;
                 return(
                     <div key={u.id} className={s.user}>
                         <div className={s.avaAndFollow}>
@@ -33,6 +32,7 @@ let Users = (props) => {
                         <div className={s.userInfo}>
                             <h3>{u.name}</h3>
                             <div>{u.status}</div>
+                            <div style={{color: "red",margin:"10px"}}>{u.id}</div>
                         </div>
                     </div>
                 )}

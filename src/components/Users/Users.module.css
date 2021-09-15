@@ -5,16 +5,16 @@
     padding:10px;
 }
 .avaAndFollow{
+    width: 45%;
     display: inline-block;
-    margin: 0 auto;
 }
 .userInfo{
-    display: inline-block;
+    width: 45%;
+display: inline-block;
 }
 .activePage{
     font-weight: bold;
 }
 .avaAndFollow img{
-    width:100px;
-    height: 100px;
+    width:100px
 }

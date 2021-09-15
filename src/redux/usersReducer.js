@@ -16,7 +16,6 @@ const usersReducer = (state = initialState, action) => {
         case 'SWITCH_FOLLOW_STATUS':
 
             return {
-
                 ...state,
                 users: state.users.map(
                     u => {

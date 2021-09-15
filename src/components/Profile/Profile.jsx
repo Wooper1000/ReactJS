@@ -1,13 +1,12 @@
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import PostsContainer from "./Posts/PostsContainer";
-import store from "../../redux/reduxStore";
+//import PostsContainer from "./Posts/PostsContainer";
+//import store from "../../redux/reduxStore";
 let Profile = (props)=> {
-    debugger;
+
     return(
     <div className={s.profile}>
-<div> {!props.profile.fullName?props.profile.fullName:<ProfileInfo/>}</div>
-        {/*<ProfileInfo/>*/}
+        <ProfileInfo profile={props.profile}/>
         {/*<PostsContainer store={store}/>*/}
 
     </div>

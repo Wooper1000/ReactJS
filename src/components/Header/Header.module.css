@@ -6,3 +6,8 @@
   grid-area: h;
   background-color:darkmagenta;
 }
+.authBlock{
+  margin:10px;
+  float: right;
+  color: white;
+}
