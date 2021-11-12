@@ -8,24 +8,24 @@ let Users = (props) => {
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(<span className={props.currentPage === i ? s.activePage : null} onClick={() => {
-            props.onPageChange(i)
+            props.onPageChange(i,props.pagesCount)
         }}> {i} </span>)
     }
-
     return  <>
        <div>{props.isFetching ? <Preloader /> : null}</div>
         <div>
             <span>{pages}</span>
         </div>
         {
-            props.usersList.map(u => {
+            props.users.map(u => {
+
                 return(
                     <div key={u.id} className={s.user}>
                         <div className={s.avaAndFollow}>
                             <NavLink to={'/profile/'+u.id}>
                             <img src={u.photos.small ? u.photos.small : no_avatar} alt='НЕТУ'/>
                             </NavLink>
-                            <button onClick={() => {
+                            <button disabled={props.switchingFollowUsers.some((id)=>{return id===u.id})} onClick={() => {
                                 props.switchFollowStatus(u.id)
                             }}>{u.followed ? "Отписаться" : "Подписаться"}</button>
                         </div>

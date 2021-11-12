@@ -1,44 +1,20 @@
-import {sendMessageActionCreator, updateNewMessageActionCreator} from "../../redux/dialogsReducer";
+import {sendMessage} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-let mapStateToProps = (state)=>{
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
+
+let mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText:state.dialogsPage.newMessageText
-    }
-}
-let mapDispatchToProps = (dispatch)=>{
-
-    return {
-        sendMessage : ()=>{dispatch(sendMessageActionCreator())},
-        updateNewMessageText : (text)=>{
-            dispatch(updateNewMessageActionCreator(text))
-        }
+        newMessageText: state.dialogsPage.newMessageText,
+        auth: state.auth
     }
 }
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+export default compose(
+    connect(mapStateToProps, {sendMessage}),withRouter,withAuthRedirect
+)(Dialogs)
 
-
-// const DialogsContainer2 = (props) => {
-//     let state = props.store.getState().dialogsPage;
-//     let sendMessage = () => {
-//         props.store.dispatch(sendMessageActionCreator());
-//         props.store.dispatch(updateNewMessageActionCreator(''));
-//     }
-//     let updateNewMessageText = (text) => {
-//         props.store.dispatch(updateNewMessageActionCreator(text));
-//     }
-//
-//     return (
-//        <Dialogs sendMessage ={sendMessage}
-//                 updateNewMessageText ={updateNewMessageText}
-//                 dialogs = {state.dialogs}
-//                 messages = {state.messages}
-//                 newMessageText = {state.newMessageText}
-//        />
-//
-// )
-// }
-export default DialogsContainer;
